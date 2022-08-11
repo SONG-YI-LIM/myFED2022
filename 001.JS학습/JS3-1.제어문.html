@@ -11,6 +11,117 @@
                 함수명: jumsu
                 기능: 점수에 따른 평가출력하기
         *********************************************/
+        function jumsu(){ // 함수 jumsu
+            // 1. 호출확인
+            // console.log("점수야 뭐야?");
+
+            // 2. 대상선정 :
+            // 2-1. 점수를 가져올 대상 : #jumsu
+            var jumsu = document.getElementById("jumsu"); // 변수 jumsu
+
+            // 2-2. 입력된 값 읽어오기
+            var score = jumsu.value; // value는 텍스트 입력창의 값을 읽어오는 속성
+            console.log("입력값:",score);
+
+            // 2-3. 출력대상 : #jexp
+            var jexp = document.querySelector("#jexp");
+
+            // 2-4. 칭찬스티커 : #jshow
+            var jshow = document.querySelector("#jshow");
+
+            // 숫자여부 판별 및 숫자범위 판별의 공통 코드 함수로 만들기
+            var comFn = function(){ // 이름 없는 함수 function(){}을 변수에 할당하는 순간 그 변수는 함수가 된다!
+                // 2. 글자색 초기화
+                jexp.style.color = "#000";
+
+                // 3. 칭찬스티커 위치 초기화
+                jshow.style.backgroundPosition = "322px 0";
+
+                // 4. 입력창 내용 지우기
+                jumsu.value = ""; // 빈문자 넣어 지우기
+
+                // 5. 입력창에 포커스 주기(버튼을 클릭한 경우)
+                jumsu.focus(); // focus()는 입력 창에 커서를 보내는 JS내장함수
+            };
+            
+            //////////////////////////////
+            // 2-5-1. 숫자여부 판별하기
+            // 숫자판별 내장함수(브라우저가 원래 가지고 있는) 사용 → isNaN(값)
+            // is Not a Number? 숫자가 아니니?
+            // 결과 : 숫자가 아니면 true / 숫자면 false
+            console.log("숫자가 아니니?", isNaN(score));
+            if(isNaN(score)){ // 숫자가 아니면
+                // 1. 메시지 출력하기
+                jexp.innerText = "숫자만 입력해 주세요!";
+                console.log("여기 들어옴!");
+
+                // 2. 각종 초기화 기능 함수 호출
+                comFn(); // 함수화니까 () 잊지 않기
+                
+                // 이 if문에 들어온 경우 여기서 함수를 나가게 하려면?
+                // return 키워드 사용!!!
+                return;
+                // 함수를 나갈 땐 return!!!
+            }
+
+            //////////////////////////////
+            // 2-5-2. 숫자범위 판별하기
+            // 입력값의 범위가 아닌 것은 0미만 100초과
+            else if(score < 0 || score > 100 ){
+                // 1. 메시지 출력하기
+                jexp.innerText = "0이상 100이하의 숫자만 입력해 주세요!";
+
+                // 2. 각종 초기화 기능 함수 호출
+                comFn(); // 함수화니까 () 잊지 않기
+
+                // 여기에 들어오면 여기서 함수를 나가라! → return
+                return;
+            }
+
+            //////////////////////////////
+            // 3. 점수환산하기
+            // 메시지 변수
+            var msg;
+            // 글자색 변수
+            var fc;
+            // 배경위치 변수
+            var bgp;
+
+            if(score >= 90){
+                msg = "매우잘함";
+                fc = "blue";
+                bgp = "0 0";
+            }else if(score >= 80){ // if문을 모두 따로 경우 범위지정을 모두 해야함! if(score < 90 && score >= 80)
+                msg = "잘함";
+                fc = "green";
+                bgp = "-322px 0";
+            }else if(score >= 70){
+                msg = "보통";
+                fc = "yellow";
+                bgp = "-322px -322px";
+            }else if(score >= 60){
+                msg = "노력요함";
+                fc = "orange";
+                bgp = "0 -644px";
+            }else{
+                msg = "재시험";
+                fc = "red";
+                bgp = "-644px -644px";
+            }
+
+            // 할당된 변수값 확인
+            console.log("msg:",msg,"/fc:",fc,"/bgp:",bgp);
+
+            // 4. 출력하기
+            jexp.innerText = "평가결과는 " + msg; // innerText는 선택요소에 글자출력
+
+            // 5. 글자색 바꾸기
+            jexp.style.color = fc;
+
+            // 6. 칭찬스티커 보이기
+            jshow.style.backgroundPosition = bgp;
+            
+        } ////////// jumsu 함수 //////////
         
 
         /********************************************** 
@@ -226,8 +337,8 @@
     <h2>if문 연습</h2>
     <h3 id="jexp">평가출력</h3>
     <label for="jumsu">점수입력:</label>
-    <input type="text" id="jumsu" placeholder="점수를 입력하세요!" maxlength="3" />
-    <button class="sbtn">평가하기</button>
+    <input type="text" id="jumsu" placeholder="점수를 입력하세요!" maxlength="3" onkeypress="if(event.keyCode === 13) jumsu()" />
+    <button class="sbtn" onclick="jumsu()">평가하기</button>
     <!-- 
         onkeypress 이벤트 속성 
         -> 키보드를 치면 발생하는 이벤트연결 속성
