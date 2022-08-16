@@ -41,9 +41,19 @@
             // 1. 호출 및 전달값 확인
             console.log("미니언즈:", num)
 
-            
+            // 2. 대상선정 : 파란상자 .Bcase
+            let bcase = document.querySelector(".Bcase");
+            // console.log(bcase);
 
-
+            // 3. 이미지 태그 넣기
+            // innerHTML = 태그
+            // += 대입연산자(기존값에 더하기)
+            // for(시;한;증){}
+            // for문의 한계값에 전달변수로 넣고 도는 횟수를 제어함!
+            // num은 1, 5, 10 중 하나가 들어옴!
+            for(let i = 0; i < num; i++){ // i < 1 or i < 5 or i < 10
+                bcase.innerHTML += '<img src="./images/Minions.png" alt="미니언즈">'
+            };
         } ////////// insMini 함수 /////////////////
         ///////////////////////////////////////////
     </script>
@@ -56,7 +66,7 @@
     <img src="./images/Minions.png" alt="미니언즈" class="mini" title="나를 클릭하면 열개씩 가방에 들어갈꼬얌~!" onclick="insMini(10)">
 
     <!-- 리셋을 한다면 이렇게...! -->
-    <button>리셋</button>
+    <button onclick="document.querySelector('.Bcase').innerHTML=''">리셋</button>
     
     <!-- 파란상자 -->
     <div class="Bcase"></div>
