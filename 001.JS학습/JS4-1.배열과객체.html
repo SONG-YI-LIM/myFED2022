@@ -346,8 +346,48 @@
                 자신의 선정영화 정보를 아래와 유사한 형식으로
                 셋팅하시오!(변수명을 자신이 지어본다!)
             ***********************************************/
+            const movieData = {
+                title : "탑건 매버릭",
+                director : "조셉 코신스키",
+                actors : "톰 크루즈, 마일즈 텔러, 제니퍼 코넬리",
+                mvbx : function(){
+                    let poster = document.querySelector("#mvbx");
+
+                    mvbx.innerHTML = `
+                        <img src="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20220509_176%2F1652081912471yhg3N_JPEG%2Fmovie_image.jpg" alt=""">
+                    `;
+
+                    let img = document.querySelector("img");
+                    img.style.position = "fixed";
+                    img.style.top = "50%";
+                    img.style.left = "50%";
+                    img.style.transform = "translate(-50%,-50%)";
+                    img.style.width = "400px";
+                    img.style.height = "450px";
+
+                    img.onclick = () => img.remove();
+                }
+            }
+
+            let txt6 = document.querySelector("#txt6");
+
+            txt6.innerHTML = 
+            `
+                영화 제목 : ${movieData.title} / 
+                감독 : ${movieData.director} /
+                주연 : ${movieData.actors}
+            `;
+
+            txt6.title =   `
+                클릭하시면 ${movieData.title} 포스터를 보실 수 있습니다!
+            `;
+
+            txt6.style.cursor = "pointer";
+
+            txt6.onclick = movieData.mvbx;
+
             // 예시코드
-            // 변수명을 자신이 지어본다
+            /*
             const myMv = {
                 // 1. 영화제목
                 title: "더 배트맨",
@@ -444,21 +484,8 @@
             // #txt6클릭시
             txt6.onclick = myMv.trailer;
 
-
-            목요일 과제!!
+            */
         }
-
-
-        
-
-
-
-
-       
-        
-
-                
-
 
         /********************************************* 
             [ 객체에 대한 단상 ]
@@ -493,6 +520,7 @@
             변수명[속성명]
             -> 속성명을 따옴표로 싼 문자형 이어야한다!
             (만약 변수형 속성명이어도 이렇게 부를땐 따옴표로 쌈)
+            예) ${myMv["title"]}
 
             또는
 

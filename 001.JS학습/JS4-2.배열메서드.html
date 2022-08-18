@@ -75,10 +75,10 @@
             console.log("로딩완료!");
 
             // 1. 배열변수 선언과 할당
-            const fruit = ["배","사과","용과","딸기"];
+            const fruit = ["배","사과","용과","딸기"]; // 배열과 객체는 상수, 이후에 못 바꾸게
             // 2. 과일명과 배경이미지명을 매징함->객체
             const frObj = {
-                "배":"fruits_01",
+                "배":"fruits_01",   
                 "사과":"fruits_02",
                 "용과":"fruits_14",
                 "딸기":"fruits_09",
@@ -103,7 +103,7 @@
 
             // 4. 처음 배열 출력하기 ///////
             const arrShow = () =>
-            showit.innerText = fruit.join("*");
+            showit.innerText = fruit.join("♡");
             // join(구분자) 
             // -> 배열사이에 구분자를 넣고 문자로 변환
 
@@ -180,7 +180,8 @@
                 console.log("뒷배열추가!");
 
                 // 선택대상: #sel 인 선택박스의 값
-                // 배열에 맨뒤 값추가는 -> push() 
+                // 배열에 맨뒤 값추가는 -> push()
+                fruit.push(sel.value);
                
                 // sel.value는 선택된 option값
                 // -> option에 value속성이 있으면 그값
@@ -203,7 +204,8 @@
                 console.log("앞배열추가!");
 
                 // 선택대상: #sel 인 선택박스의 값
-                // 배열에 맨앞 값추가는 -> unshift() 
+                // 배열에 맨앞 값추가는 -> unshift()
+                fruit.unshift(sel.value);
                 
                 // sel.value는 선택된 option값
                 // -> option에 value속성이 있으면 그값
@@ -225,7 +227,7 @@
                 console.log("뒷배열삭제!");
 
                 // 배열에 맨뒤 값삭제는 -> pop() 
-                
+                fruit.pop();
 
                 // 배열정보 화면출력하기
                 arrShow();
@@ -243,7 +245,7 @@
                 console.log("앞배열삭제!");
 
                 // 배열에 맨앞 값삭제는 -> shift() 
-                
+                fruit.shift();
 
                 // 배열정보 화면출력하기
                 arrShow();
@@ -298,7 +300,10 @@
 
                 // 중간배열 삭제하기 -> splice(순번,지울개수)
                 // splice(순번) -> 순번부터 뒤를 모두지움
-
+                // fruit.splice(2,1); // 용과 삭제
+                // fruit.splice(1); // 배부터 삭제
+                fruit.splice(anum.value,delnum.value);
+                
                 // 순번은 선택과일 : anum 변수
                 // 지울개수는 지울개수입력박스 : delnum 변수
 
@@ -329,7 +334,7 @@
 
                 // 순번은 선택과일 : anum 변수
                 // 추가할 과일은 #sel에서 선택한다!
-
+                fruit.splice(anum.value,0,sel.value);
                
 
                 // 배열정보 화면출력하기
