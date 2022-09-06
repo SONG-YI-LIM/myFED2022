@@ -10,9 +10,28 @@ $(() => { ////////// jQB ///////////////////////
     // 메서드: before(요소) -> 선택요소 앞에 형제요소 삽입
     // -> 참고) after(요소) -> 선택요소 뒤에 형제요소 삽입
     // 선택자 :last는 제이쿼리 전용임!
+    $('.sns a:last').before(`
+        <a class="fi fi-laptop">
+            <span class="ir">
+                로그인
+            </span>
+        </a>
+        <a class="fi fi-user-secret">
+            <span class="ir">
+                회원가입
+            </span>
+        </a>
+        <a class="fi fi-camera">
+            <span class="ir">
+                갤러리
+            </span>
+        </a>
+    `);
     
-
     ///// sns 파트 a요소들에 툴팁넣기 ////////
+    $('.sns a').each((idx,ele)=>{
+        $(ele).attr('title',$(ele).children('.ir').text().trim());
+    });
     
 
     // 선택메서드 비교
@@ -23,11 +42,54 @@ $(() => { ////////// jQB ///////////////////////
         SNS 메뉴 파트 링크 셋팅하기
     ************************************/
     // 대상: .sns a
-    
+    $('.sns a').click(e=>{
+        let ele = e.currentTarget;
+        e.preventDefault();
+        let atxt = $(ele).text().trim();
+        // console.log(atxt);
+
+        let url;
+        switch(atxt){
+            case "인스타그램":
+                url = "https://www.instagram.com/VOGUEKOREA/";
+                break;
+            case "페이스북":
+                url = "https://www.facebook.com/VOGUEkr";
+                break;
+            case "트위터":
+                url = "https://twitter.com/VogueKorea";
+                break;
+            case "유튜브":
+                url = "https://www.youtube.com/user/VogueKorea?sub_confirmation=1";
+                break;
+            case "카카오스토리":
+                url = "https://story.kakao.com/ch/voguekr";
+                break;
+            case "로그인":
+                url = "login.html";
+                break;
+            case "회원가입":
+                url = "member.html";
+                break;
+            case "갤러리":
+                url = "gallery.html";
+                break;
+        }
+
+        if (atxt === "로그인" ||
+            atxt === "회원가입" ||
+            atxt === "갤러리")
+            location.href = url;
+        else
+            window.open().location.href = url;
+
+    });
 
     /************************************ 
             메인로고 링크 셋팅하기
     ************************************/
+    $('.logo a').click(()=>
+        location.href = 'index.html');
     
     /************************************ 
         GNB 메뉴 파트 링크 셋팅하기
